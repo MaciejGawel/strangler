@@ -1,4 +1,11 @@
-# Overview
+# Introduction
+
+This repository contains guides for AGH students as a part of
+"Środowiska Udostępniania Usług" course.
+
+**For internal use only**
+
+## Development
 
 Install `gitbook-cli`
 

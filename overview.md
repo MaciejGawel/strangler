@@ -1,6 +1,4 @@
-# Introduction
-
-## Overview
+# Overview
 
 In this exercise we we will learn how to migrate from legacy monolith
 application to the cloud-native microservices. We'll use practices from Martin
