@@ -5,23 +5,7 @@ push it to the Amazon [Elastic Container Registry][1] (ECR).
 
 ## Implementation instructions
 
-### Step 1: Prerequisites
-
-In the next steps you are going to use:
-
-- Docker
-- Github
-- Amazon ECR
-- Amazon ECS
-
-To complete this course make sure that you have the following tools:
-
-- Docker CE - [installation guide][2]
-- Git client
-- AWS account
-- AWS CLI - [installation guide][3]
-
-### Step 2: Download & open the project
+### Step 1: Download & open the project
 
 Download the source code from Github
 
@@ -31,14 +15,14 @@ Download the source code from Github
 git clone <repo url>
 ```
 
-### Step 3: Provision a repository
+### Step 2: Provision a repository
 
 <!-- TODO: Verify these steps -->
 <!-- TODO: Change repository name -->
 
 Create the repository:
 
-1. Navigate to the [ECR console][4].
+1. Navigate to the [ECR console][2].
 1. On the **Repositories** page, select **Create Repository**.
 1. On the Create repository page, enter the following name your repository:
    *monolith*.
@@ -56,7 +40,7 @@ Create the repository:
 
    ---
 
-### Step 4: Build & Push the Docker image
+### Step 3: Build & Push the Docker image
 
 <!-- TODO: Verify these steps -->
 
@@ -99,6 +83,4 @@ Use the terminal to:
    present.
 
 [1]: https://aws.amazon.com/ecr/
-[2]: https://docs.docker.com/engine/install/
-[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
-[4]: https://console.aws.amazon.com/ecs/home?#/repositories
+[2]: https://console.aws.amazon.com/ecs/home?#/repositories

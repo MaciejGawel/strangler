@@ -43,6 +43,24 @@ application architecture.
 Application architecture diagram
 ```
 
+## Prerequisites
+
+In this course you will use:
+
+- Docker
+- Github
+- Amazon ECR
+- Amazon ECS
+
+To complete this course make sure that you have the following tools:
+
+- Docker CE - [installation guide][4]
+- Git client
+- AWS account
+- AWS CLI - [installation guide][5]
+
 [1]: https://martinfowler.com/bliki/StranglerFigApplication.html
 [2]: https://aws.amazon.com/ecs/
 [3]: https://spring.io/
+[4]: https://docs.docker.com/engine/install/
+[5]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
