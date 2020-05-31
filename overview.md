@@ -7,10 +7,12 @@ a legacy system using microservices.
 
 In this classes we will:
 
-1. Deploy legacy monolith application to Amazon [Elastic Container Service][2]
-   (ECS)
+1. Deploy legacy monolith application in Docker container.
+1. Deploy [Netflix Open Source Software][2] (Netflix OSS)
+  - Eureka
+  - Zuul
 1. Break monolith into several microservices
-1. Strangle legacy application with new microservices deployed in ECS
+1. Strangle legacy application with new microservices deployed in Docker
 
 ## Why it Matters
 
@@ -33,34 +35,32 @@ service, or as a group of services.
 ## Monolith Application Architecture
 
 During this classes, we will show you how to run a sample monolith application
-in a Docker container, deploy it in ECS. This sample application is written in
-Java with use of [Spring framework][3]. The following diagram presents
-application architecture.
+in a Docker container, run it with Docker Compose. This sample application is
+written in Java with use of [Spring framework][3]. The following diagram
+presents application architecture.
 
-<!-- Add application architecture diagram -->
-
-```
-Application architecture diagram
-```
+<center><img src="images/architecture.svg" /></center>
 
 ## Prerequisites
 
 In this course you will use:
 
 - Docker
+- Docker Compose
 - Github
-- Amazon ECR
-- Amazon ECS
+- Java with Maven
+- Python
 
 To complete this course make sure that you have the following tools:
 
 - Docker CE - [installation guide][4]
+- Docker Compose - [installation guide][5]
 - Git client
-- AWS account
-- AWS CLI - [installation guide][5]
+- Java
+- Maven
 
 [1]: https://martinfowler.com/bliki/StranglerFigApplication.html
-[2]: https://aws.amazon.com/ecs/
+[2]: https://netflix.github.io/
 [3]: https://spring.io/
 [4]: https://docs.docker.com/engine/install/
-[5]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
+[5]: https://docs.docker.com/compose/install/
