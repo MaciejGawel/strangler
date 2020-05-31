@@ -1,7 +1,7 @@
 # Containerize the Monolith
 
 In this module you will build a Docker image for the monolith application and
-push it to the Amazon [Elastic Container Registry][1] (ECR).
+run it with use of Docker Compose.
 
 ## Implementation instructions
 
@@ -9,78 +9,51 @@ push it to the Amazon [Elastic Container Registry][1] (ECR).
 
 Download the source code from Github
 
-<!-- TODO: Add repo url -->
-
 ```sh
-git clone <repo url>
+git clone https://github.com/MaciejGawel/spring-bookinfo.git
 ```
 
-### Step 2: Provision a repository
+### Step 2: Build bookinfo Docker image
 
-<!-- TODO: Verify these steps -->
-<!-- TODO: Change repository name -->
-
-Create the repository:
-
-1. Navigate to the [ECR console][2].
-1. On the **Repositories** page, select **Create Repository**.
-1. On the Create repository page, enter the following name your repository:
-   *monolith*.
-1. Select Create repository.
-
-   After the repository is created, a confirmation message showing with the
-   repository address. The repository address is in the following format:
-   `[account-ID].dkr.ecr.[region].amazonaws.com/[repo-name]`.
-   The `[account-ID]`, `[region]`, and `[repo-name]` will be specific to your
-   setup.
-
-   ---
-
-   **NOTE:** You will need the repository address throughout this tutorial.
-
-   ---
-
-### Step 3: Build & Push the Docker image
-
-<!-- TODO: Verify these steps -->
-
-Use the terminal to:
-
-1. Authenticate Docker log in
+1. Navigate to the *bookinfo* directory.
+1. Build image with Maven
 
    ```sh
-   $(aws ecr get-login --no-include-email --region [your-region])
+   mvn spring-boot:build-image
    ```
 
-   Replace `[your-region]` with your specific information. If the authentication
-   was successful, you will receive the confirmation message: *Login Succeeded*.
-
-1. Build the image
+1. Verify that image exists
 
    ```sh
-   docker build -t monolith .
+   docker images bookinfo
+
+   REPOSITORY  TAG                 IMAGE ID            CREATED             SIZE
+   bookinfo    0.0.1-SNAPSHOT      caf341499b4b        1 minute ago        252MB
    ```
 
-1. Tag the image so you can push it to Amazon ECR
+### Step 3: Build Client image
+
+1. Navigate to the root directory
+1. Run Docker Cmpose build action
 
    ```sh
-   docker tag api:latest [account-ID].dkr.ecr.[region].amazonaws.com/monolith:v1
+   docker-compose build
    ```
 
-   Replace the `[account-ID]` and `[region]` placeholders with your specific
-   information.
+### Step 4: Run Docker Compose
 
-1. Push the image to Amazon ECR
+1. Run Docker Compose up action
 
    ```sh
-   docker push [account-id].dkr.ecr.[region].amazonaws.com/monolith:v1
+   docker-compose up -d
    ```
 
-   Replace the `[account-ID]` and `[region]` placeholders with your specific
-   information.
+1. Verify that client is working
 
-1. Navigate to your Amazon ECR repository, and verify if the docker image is
-   present.
+   <!-- TODO: Change this output when client is ready. -->
 
-[1]: https://aws.amazon.com/ecr/
-[2]: https://console.aws.amazon.com/ecs/home?#/repositories
+   ```sh
+   docker-compose logs
+   ...
+   client_1    | {"_embedded":{"detailsList":[{"id":2,"isbn":"978-3-16-148410-0","author":"William Shakespeare","year":1595,"type":"paperback","pages":200,"publisher":"PublisherA","language":"English","_links":{"self":{"href":"http://bookinfo:8080/details/2"},"details":{"href":"http://bookinfo:8080/details"}}}]},"_links":{"self":{"href":"http://bookinfo:8080/details"}}}
+   ```
