@@ -5,4 +5,4 @@
 * [Deploy the Monolith](deploy_monolith.md)
 * [Strangle the Monolith](strangle_monolith.md)
 * Summary
-* Clean Up
+* [Clean Up](cleanup.md)
