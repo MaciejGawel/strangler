@@ -4,8 +4,8 @@
 * [Containerize the Monolith](containerize_monolith.md)
 
 ## Strangle the Monolith
-* [Deploy Proxy Server](deploy_proxy.md)
-* [Strangle the Monolith](strangle_monolith.md)
+* [Overview](strangle/overview.md)
+* [Deploy Proxy Server](strangle/deploy_proxy.md)
 
 ## Summary
 * [Clean Up](cleanup.md)
