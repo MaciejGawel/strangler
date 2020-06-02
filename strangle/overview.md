@@ -5,11 +5,7 @@ interconnected servies and strangle old application.
 
 ## Desired architecture overview
 
-<!-- TODO: Add architecture overvierw -->
-
-```
-Desired architecture overview
-```
+<center><img src="images/architecture.svg" /></center>
 
 ## Why Microservices?
 

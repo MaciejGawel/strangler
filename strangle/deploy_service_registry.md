@@ -14,8 +14,8 @@ balancing and failover of middle-tier servers.
 
 ## Useful links
 
-- [Service Discovery: Eureka Server][2]
-- [Service Discovery: Eureka Clients][3]
+- **[Service Discovery: Eureka Server][2]**
+- **[Service Discovery: Eureka Clients][3]**
 
 ## Implementation instructions
 

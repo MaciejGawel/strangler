@@ -6,15 +6,16 @@ route our requests to appropriate microservice. For this purpose we will use
 
 ## Useful links
 
-- [Announcing Zuul: Edge Service in the Cloud][2]
-- [Open Sourcing Zuul 2][3]
-- [Spring Boot – Zuul – API Gateway][4]
+- **[Router and Filter: Zuul][2]**
+- [Announcing Zuul: Edge Service in the Cloud][3]
+- [Open Sourcing Zuul 2][4]
+- [Spring Boot – Zuul – API Gateway][5]
 
 ## Implementation instructions
 
 ### Step 1: Generate proxy project
 
-1. Visit [Spring Initializr][5]
+1. Visit [Spring Initializr][6]
 1. Fill in
   - **Group** - *pl.edu.agh*
   - **Artifact** - *proxy*
@@ -77,9 +78,7 @@ route our requests to appropriate microservice. For this purpose we will use
      bookinfo:
        image: bookinfo/monolith
      proxy:
-       image: proxy
-       ports:
-         8080:8080
+       image: bookinfo/proxy
        depends_on:
          - bookinfo
        links:
@@ -87,6 +86,8 @@ route our requests to appropriate microservice. For this purpose we will use
      client:
        build:
          context: ./client
+       environment:
+         - BOOKINFO_URL=http://proxy:8080
        depends_on:
          - proxy
        links:
@@ -111,7 +112,8 @@ route our requests to appropriate microservice. For this purpose we will use
 
 
 [1]: https://github.com/Netflix/zuul
-[2]: https://netflixtechblog.com/announcing-zuul-edge-service-in-the-cloud-ab3af5be08ee
-[3]: https://netflixtechblog.com/open-sourcing-zuul-2-82ea476cb2b3
-[4]: https://codecouple.pl/2018/03/16/31-spring-boot-zuul-api-gateway/
-[5]: https://start.spring.io/
+[2]: https://cloud.spring.io/spring-cloud-netflix/multi/multi__router_and_filter_zuul.html
+[3]: https://netflixtechblog.com/announcing-zuul-edge-service-in-the-cloud-ab3af5be08ee
+[4]: https://netflixtechblog.com/open-sourcing-zuul-2-82ea476cb2b3
+[5]: https://codecouple.pl/2018/03/16/31-spring-boot-zuul-api-gateway/
+[6]: https://start.spring.io/
