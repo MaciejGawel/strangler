@@ -1,13 +1,13 @@
 # Summary
 
 * [Overview](overview.md)
-* [Containerize the Monolith](containerize_monolith.md)
+* [Monolith](monolith.md)
 
 ## Strangle the Monolith
 * [Overview](strangle/overview.md)
-* [Deploy Proxy Server](strangle/deploy_proxy.md)
-* [Deploy Service Registry](strangle/deploy_service_registry.md)
-* [Deploy microservices](strangle/deploy_microservices.md)
+* [Proxy Server](strangle/proxy.md)
+* [Service Registry](strangle/service_registry.md)
+* [Microservices](strangle/microservices.md)
 
 ## Summary
 * [Clean Up](cleanup.md)
