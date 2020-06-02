@@ -1,7 +1,11 @@
 # Containerize the Monolith
 
 In this module you will build a Docker image for the monolith application and
-run it with use of Docker Compose.
+run it with use of Docker Compose. This sample application is written in
+Java with use of [Spring framework][3]. The following diagram presents
+application architecture.
+
+<center><img src="images/architecture.svg" /></center>
 
 ## Implementation instructions
 
@@ -19,16 +23,16 @@ git clone https://github.com/MaciejGawel/spring-bookinfo.git
 1. Build image with Maven
 
    ```sh
-   mvn spring-boot:build-image
+   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/monolith
    ```
 
 1. Verify that image exists
 
    ```sh
-   docker images bookinfo
+   docker images bookinfo/monolith
 
-   REPOSITORY  TAG                 IMAGE ID            CREATED             SIZE
-   bookinfo    0.0.1-SNAPSHOT      caf341499b4b        1 minute ago        252MB
+   REPOSITORY           TAG         IMAGE ID            CREATED            SIZE
+   bookinfo/monolith    latest      caf341499b4b        1 minute ago       252MB
    ```
 
 ### Step 3: Build Client image
@@ -50,10 +54,10 @@ git clone https://github.com/MaciejGawel/spring-bookinfo.git
 
 1. Verify that client is working
 
-   <!-- TODO: Change this output when client is ready. -->
-
    ```sh
-   docker-compose logs
+   docker-compose logs -f
    ...
-   client_1    | {"_embedded":{"detailsList":[{"id":2,"isbn":"978-3-16-148410-0","author":"William Shakespeare","year":1595,"type":"paperback","pages":200,"publisher":"PublisherA","language":"English","_links":{"self":{"href":"http://bookinfo:8080/details/2"},"details":{"href":"http://bookinfo:8080/details"}}}]},"_links":{"self":{"href":"http://bookinfo:8080/details"}}}
+   client_1    | INFO:root:GET /products returned 200 OK
+   client_1    | INFO:root:GET /details returned 200 OK
+   client_1    | INFO:root:GET /reviews returned 200 OK
    ```

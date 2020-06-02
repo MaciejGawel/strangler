@@ -4,7 +4,7 @@ To start strangling our legacy application we will need a proxy server that will
 route our requests to appropriate microservice. For this purpose we will use
 [Netflix Zuul][1].
 
-## Materials
+## Useful links
 
 - [Announcing Zuul: Edge Service in the Cloud][2]
 - [Open Sourcing Zuul 2][3]
@@ -55,7 +55,7 @@ route our requests to appropriate microservice. For this purpose we will use
    spring.application.name=proxy
 
    zuul.routes.bookinfo.path=/**
-   zuul.routes.bookinfo.url=http://localhost:8080/
+   zuul.routes.bookinfo.url=http://bookinfo:8080/
    ```
 
 ### Step 3: Run Proxy Server
@@ -63,7 +63,7 @@ route our requests to appropriate microservice. For this purpose we will use
 1. Build Docker image
 
    ```sh
-   mvn spring-boot:build-image
+   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
    ```
 
 1. Add new service to Docker compose
@@ -75,9 +75,9 @@ route our requests to appropriate microservice. For this purpose we will use
    version: '3'
    services:
      bookinfo:
-       image: bookinfo:0.0.1-SNAPSHOT
+       image: bookinfo/monolith
      proxy:
-       image: proxy:0.0.1-SNAPSHOT
+       image: proxy
        ports:
          8080:8080
        depends_on:
@@ -101,12 +101,12 @@ route our requests to appropriate microservice. For this purpose we will use
 
 1. Verify that client is working
 
-   <!-- TODO: Change this output when client is ready. -->
-
    ```sh
-   docker-compose logs
+   docker-compose logs -f
    ...
-   client_1    | {"_embedded":{"detailsList":[{"id":2,"isbn":"978-3-16-148410-0","author":"William Shakespeare","year":1595,"type":"paperback","pages":200,"publisher":"PublisherA","language":"English","_links":{"self":{"href":"http://bookinfo:8080/details/2"},"details":{"href":"http://bookinfo:8080/details"}}}]},"_links":{"self":{"href":"http://bookinfo:8080/details"}}}
+   client_1    | INFO:root:GET /products returned 200 OK
+   client_1    | INFO:root:GET /details returned 200 OK
+   client_1    | INFO:root:GET /reviews returned 200 OK
    ```
 
 

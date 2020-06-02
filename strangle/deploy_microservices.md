@@ -72,7 +72,7 @@ Move review package into Review project
 1. Build Proxy Docker image
 
    ```sh
-   mvn spring-boot:build-image
+   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
    ```
 
 ### Step 5: Run Review Service
@@ -80,7 +80,7 @@ Move review package into Review project
 1. Build Review Docker image
 
    ```sh
-   mvn spring-boot:build-image
+   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/review
    ```
 
 
@@ -92,23 +92,23 @@ Move review package into Review project
    version: '3'
    services:
      registry:
-       image: registry:0.0.1-SNAPSHOT
+       image: bookinfo/registry
        ports:
          8761:8761
      bookinfo:
-       image: bookinfo:0.0.1-SNAPSHOT
+       image: bookinfo/monolith
        depends_on:
          - registry
        links:
          - registry
      review:
-       image: review:0.0.1-SNAPSHOT
+       image: bookinfo/review
        depends_on:
          - registry
        links:
          - registry
      proxy:
-       image: proxy:0.0.1-SNAPSHOT
+       image: bookinfo/proxy
        ports:
          8080:8080
        depends_on:
@@ -136,12 +136,12 @@ Move review package into Review project
 
 1. Verify that client is working
 
-   <!-- TODO: Change this output when client is ready. -->
-
    ```sh
-   docker-compose logs
+   docker-compose logs -f
    ...
-   client_1    | {"_embedded":{"detailsList":[{"id":2,"isbn":"978-3-16-148410-0","author":"William Shakespeare","year":1595,"type":"paperback","pages":200,"publisher":"PublisherA","language":"English","_links":{"self":{"href":"http://bookinfo:8080/details/2"},"details":{"href":"http://bookinfo:8080/details"}}}]},"_links":{"self":{"href":"http://bookinfo:8080/details"}}}
+   client_1    | INFO:root:GET /products returned 200 OK
+   client_1    | INFO:root:GET /details returned 200 OK
+   client_1    | INFO:root:GET /reviews returned 200 OK
    ```
 
 ### Step 6: Create Details and Product services
