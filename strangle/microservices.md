@@ -29,7 +29,7 @@ microserwices. You will use Eureka for the service discovery.
 
    import org.springframework.boot.SpringApplication;
    import org.springframework.boot.autoconfigure.SpringBootApplication;
-   import org.springframework.cloud.netflix.eureka.client.EnableEurekaClient;
+   import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
    @SpringBootApplication
    @EnableEurekaClient
@@ -44,26 +44,27 @@ microserwices. You will use Eureka for the service discovery.
 1. Set application properties
 
    ```
+   spring.application.name=review
+
    eureka.client.registerWithEureka=true
-   eureka.client.fetchRegistry=true
+   eureka.client.fetchRegistry=false
    eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/
    ```
 
 ### Step 3: Move business logic
 
-Move review package into Review project
+Copy all required packages from bookinfo into new project.
 
 ### Step 4: Reconfigure Zuul Proxy
 
 1. Set application properties
 
-   <!-- TODO: verify this configuration -->
-
    ```
    ...
 
    zuul.routes.review.path=/reviews/**
-   zuul.routes.review.url=http://review:8080/
+   zuul.routes.review.serviceId=review
+   zuul.routes.review.stripPrefix=false
 
    zuul.routes.bookinfo.path=/**
    zuul.routes.bookinfo.url=http://bookinfo:8080/
@@ -83,24 +84,17 @@ Move review package into Review project
    mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/review
    ```
 
-
 1. Add new service to Docker compose
-
-   <!-- TODO: Update this docker-compose when ready -->
 
    ```yml
    version: '3'
    services:
+     bookinfo:
+       image: bookinfo/monolith
      registry:
        image: bookinfo/registry
        ports:
-         8761:8761
-     bookinfo:
-       image: bookinfo/monolith
-       depends_on:
-         - registry
-       links:
-         - registry
+         - 8761:8761
      review:
        image: bookinfo/review
        depends_on:
@@ -109,19 +103,19 @@ Move review package into Review project
          - registry
      proxy:
        image: bookinfo/proxy
-       ports:
-         8080:8080
        depends_on:
+         - registry
          - bookinfo
          - review
-         - registry
        links:
+         - registry
          - bookinfo
          - review
-         - registry
      client:
        build:
          context: ./client
+       environment:
+         - BOOKINFO_URL=http://proxy:8080
        depends_on:
          - proxy
        links:
@@ -132,7 +126,11 @@ Move review package into Review project
 
    ```sh
    docker-compose restart
+   docker-compose up -d
    ```
+
+1. Access Eureka Dashboard at `http://localhost:8761` and verify that Proxy
+   instance is registered.
 
 1. Verify that client is working
 
@@ -143,6 +141,13 @@ Move review package into Review project
    client_1    | INFO:root:GET /details returned 200 OK
    client_1    | INFO:root:GET /reviews returned 200 OK
    ```
+
+   ---
+
+   **NOTE:** You may need to wait before Review service is registered in Eureka.
+   During this period, Proxy server may be failing.
+
+   ---
 
 ### Step 6: Create Details and Product services
 

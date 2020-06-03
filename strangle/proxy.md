@@ -47,8 +47,6 @@ route our requests to appropriate microservice. For this purpose we will use
 
 1. Set application properties
 
-   <!-- TODO: verify this configuration -->
-
    ```
    #Server port
    server.port=8080
@@ -68,9 +66,6 @@ route our requests to appropriate microservice. For this purpose we will use
    ```
 
 1. Add new service to Docker compose
-
-   <!-- TODO: Update this docker-compose when ready -->
-   <!-- TODO: Add env to client -->
 
    ```yml
    version: '3'
@@ -98,6 +93,7 @@ route our requests to appropriate microservice. For this purpose we will use
 
    ```sh
    docker-compose restart
+   docker-compose up -d
    ```
 
 1. Verify that client is working
@@ -109,7 +105,6 @@ route our requests to appropriate microservice. For this purpose we will use
    client_1    | INFO:root:GET /details returned 200 OK
    client_1    | INFO:root:GET /reviews returned 200 OK
    ```
-
 
 [1]: https://github.com/Netflix/zuul
 [2]: https://cloud.spring.io/spring-cloud-netflix/multi/multi__router_and_filter_zuul.html

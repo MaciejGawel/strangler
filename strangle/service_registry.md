@@ -30,7 +30,7 @@ balancing and failover of middle-tier servers.
   - *Eureka Server*
 1. Generate template
 
-### Step 2: Enalbe Eureka Service Registry
+### Step 2: Enable Eureka Service Registry
 
 1. Annotate Registry Application
 
@@ -52,8 +52,6 @@ balancing and failover of middle-tier servers.
    ```
 
 1. Set application properties
-
-   <!-- TODO: verify this configuration -->
 
    ```
    #Server port
@@ -80,8 +78,15 @@ balancing and failover of middle-tier servers.
 
 1. Add `@EnableEurekaClient` to the Proxy application
 
-1. Add `eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/` to
-   the Proxy application properties
+1. Set Proxy application properties
+
+   ```
+   ...
+
+   eureka.client.registerWithEureka=true
+   eureka.client.fetchRegistry=true
+   eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/
+   ```
 
 1. Build Docker image
 
@@ -99,34 +104,28 @@ balancing and failover of middle-tier servers.
 
 1. Add new service to Docker compose
 
-   <!-- TODO: Update this docker-compose when ready -->
-
    ```yml
    version: '3'
    services:
+     bookinfo:
+       image: bookinfo/monolith
      registry:
        image: bookinfo/registry
        ports:
-         8761:8761
-     bookinfo:
-       image: bookinfo/monolith
-       depends_on:
-         - registry
-       links:
-         - registry
+         - 8761:8761
      proxy:
        image: bookinfo/proxy
-       ports:
-         8080:8080
        depends_on:
-         - bookinfo
          - registry
+         - bookinfo
        links:
-         - bookinfo
          - registry
+         - bookinfo
      client:
        build:
          context: ./client
+       environment:
+         - BOOKINFO_URL=http://proxy:8080
        depends_on:
          - proxy
        links:
@@ -139,7 +138,11 @@ balancing and failover of middle-tier servers.
 
    ```sh
    docker-compose restart
+   docker-compose up -d
    ```
+
+1. Access Eureka Dashboard at `http://localhost:8761` and verify that Proxy
+   instance is registered.
 
 1. Verify that client is working
 
@@ -150,7 +153,6 @@ balancing and failover of middle-tier servers.
    client_1    | INFO:root:GET /details returned 200 OK
    client_1    | INFO:root:GET /reviews returned 200 OK
    ```
-
 
 [1]: https://github.com/spring-cloud/spring-cloud-netflix
 [2]: https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-eureka-server.html
