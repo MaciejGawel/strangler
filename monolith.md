@@ -2,7 +2,7 @@
 
 In this module, you will build a Docker image for the monolith application and
 run it using Docker Compose. This sample application is written in Java with the
-use of [Spring framework][3]. The following diagram presents the application
+use of [Spring framework][1]. The following diagram presents the application
 architecture.
 
 <center><img src="images/architecture.svg" /></center>
@@ -61,3 +61,5 @@ git clone https://github.com/MaciejGawel/spring-bookinfo.git
    client_1    | INFO:root:GET /details returned 200 OK
    client_1    | INFO:root:GET /reviews returned 200 OK
    ```
+
+[1]: https://spring.io/
