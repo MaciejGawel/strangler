@@ -1,0 +1,432 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Proxy Server · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="service_registry.html" />
+    
+    
+    <link rel="prev" href="overview.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../overview.html">
+            
+                <a href="../overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../monolith.html">
+            
+                <a href="../monolith.html">
+            
+                    
+                    Monolith
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Strangle the Monolith</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="overview.html">
+            
+                <a href="overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2" data-path="proxy.html">
+            
+                <a href="proxy.html">
+            
+                    
+                    Proxy Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="service_registry.html">
+            
+                <a href="service_registry.html">
+            
+                    
+                    Service Registry
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="microservices.html">
+            
+                <a href="microservices.html">
+            
+                    
+                    Microservices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Summary</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../assignment.html">
+            
+                <a href="../assignment.html">
+            
+                    
+                    Assignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Proxy Server</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="deploy-proxy-server">Deploy proxy server</h1>
+<p>To start strangling our legacy application, we will need a proxy server that
+will route our requests to a specific microservice. For this purpose, you will
+use <a href="https://github.com/Netflix/zuul" target="_blank">Netflix Zuul</a>.</p>
+<h2 id="useful-links">Useful links</h2>
+<ul>
+<li><strong><a href="https://cloud.spring.io/spring-cloud-netflix/multi/multi__router_and_filter_zuul.html" target="_blank">Router and Filter: Zuul</a></strong></li>
+<li><a href="https://netflixtechblog.com/announcing-zuul-edge-service-in-the-cloud-ab3af5be08ee" target="_blank">Announcing Zuul: Edge Service in the Cloud</a></li>
+<li><a href="https://netflixtechblog.com/open-sourcing-zuul-2-82ea476cb2b3" target="_blank">Open Sourcing Zuul 2</a></li>
+<li><a href="https://codecouple.pl/2018/03/16/31-spring-boot-zuul-api-gateway/" target="_blank">Spring Boot &#x2013; Zuul &#x2013; API Gateway</a></li>
+</ul>
+<h2 id="implementation-instructions">Implementation instructions</h2>
+<h3 id="step-1-generate-proxy-project">Step 1: Generate proxy project</h3>
+<ol>
+<li>Visit <a href="https://start.spring.io/" target="_blank">Spring Initializr</a></li>
+<li>Fill in<ul>
+<li><strong>Group</strong> - <em>pl.edu.agh</em></li>
+<li><strong>Artifact</strong> - <em>proxy</em></li>
+<li><strong>Description</strong></li>
+</ul>
+</li>
+<li>Add dependency<ul>
+<li><em>Zuul</em></li>
+</ul>
+</li>
+<li>Generate template</li>
+</ol>
+<h3 id="step-2-enalbe-zuul-proxy">Step 2: Enalbe Zuul Proxy</h3>
+<ol>
+<li><p>Annotate Proxy Application</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> pl.edu.agh.proxy;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+<span class="hljs-keyword">import</span> org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-meta">@EnableZuulProxy</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProxyApplication</span> </span>{
+
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+    SpringApplication.run(ProxyApplication.class, args);
+  }
+}
+</code></pre>
+</li>
+<li><p>Set application properties</p>
+<pre><code>#Server port
+server.port=8080
+#Application name
+spring.application.name=proxy
+
+zuul.routes.bookinfo.path=/**
+zuul.routes.bookinfo.url=http://bookinfo:8080/
+</code></pre></li>
+</ol>
+<h3 id="step-3-run-proxy-server">Step 3: Run Proxy Server</h3>
+<ol>
+<li><p>Build Docker image</p>
+<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
+</code></pre>
+</li>
+<li><p>Add new service to Docker compose</p>
+<pre><code class="lang-yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&apos;3&apos;</span>
+<span class="hljs-attr">services:</span>
+<span class="hljs-attr">  bookinfo:</span>
+<span class="hljs-attr">    image:</span> bookinfo/monolith
+<span class="hljs-attr">  proxy:</span>
+<span class="hljs-attr">    image:</span> bookinfo/proxy
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> bookinfo
+<span class="hljs-attr">    links:</span>
+<span class="hljs-bullet">      -</span> bookinfo
+<span class="hljs-attr">  client:</span>
+<span class="hljs-attr">    build:</span>
+<span class="hljs-attr">      context:</span> ./client
+<span class="hljs-attr">    environment:</span>
+<span class="hljs-bullet">      -</span> BOOKINFO_URL=http://proxy:<span class="hljs-number">8080</span>
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> proxy
+<span class="hljs-attr">    links:</span>
+<span class="hljs-bullet">      -</span> proxy
+</code></pre>
+</li>
+<li><p>Restart Docker Compose</p>
+<pre><code class="lang-sh">docker-compose restart
+docker-compose up <span class="hljs-_">-d</span>
+</code></pre>
+</li>
+<li><p>Verify that client is working</p>
+<pre><code class="lang-sh">docker-compose logs <span class="hljs-_">-f</span>
+...
+client_1    | INFO:root:GET /products returned 200 OK
+client_1    | INFO:root:GET /details returned 200 OK
+client_1    | INFO:root:GET /reviews returned 200 OK
+</code></pre>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="overview.html" class="navigation navigation-prev " aria-label="Previous page: Overview">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="service_registry.html" class="navigation navigation-next " aria-label="Next page: Service Registry">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Proxy Server","level":"2.2","depth":1,"next":{"title":"Service Registry","level":"2.3","depth":1,"path":"strangle/service_registry.md","ref":"strangle/service_registry.md","articles":[]},"previous":{"title":"Overview","level":"2.1","depth":1,"path":"strangle/overview.md","ref":"strangle/overview.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"strangle/proxy.md","mtime":"2020-06-04T19:58:14.451Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-04T20:01:52.099Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

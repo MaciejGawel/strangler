@@ -1,0 +1,377 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Overview · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="proxy.html" />
+    
+    
+    <link rel="prev" href="../monolith.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../overview.html">
+            
+                <a href="../overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../monolith.html">
+            
+                <a href="../monolith.html">
+            
+                    
+                    Monolith
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Strangle the Monolith</li>
+        
+        
+    
+        <li class="chapter active" data-level="2.1" data-path="overview.html">
+            
+                <a href="overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="proxy.html">
+            
+                <a href="proxy.html">
+            
+                    
+                    Proxy Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="service_registry.html">
+            
+                <a href="service_registry.html">
+            
+                    
+                    Service Registry
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="microservices.html">
+            
+                <a href="microservices.html">
+            
+                    
+                    Microservices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Summary</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../assignment.html">
+            
+                <a href="../assignment.html">
+            
+                    
+                    Assignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Overview</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="strangle-the-monolith">Strangle the Monolith</h1>
+<p>In this module, you will break the Monolith application into several
+interconnected services and strangle old application.</p>
+<h2 id="desired-architecture-overview">Desired architecture overview</h2>
+<center><img src="images/architecture.svg"></center>
+
+<h2 id="why-microservices">Why Microservices?</h2>
+<p>Significant aspects described by <a href="https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-three/" target="_blank">AWS</a>:</p>
+<h3 id="isolation-of-crashes">Isolation of Crashes</h3>
+<p>Even the best engineering organizations can and do have fatal crashes in
+production. In addition to following all the standard best practices for
+handling crashes gracefully, one approach that can limit the impact of such
+crashes is building microservices. Good microservice architecture means that
+if one micro piece of your service is crashing, then only that part of your
+service will go down. The rest of your service can continue to work properly.</p>
+<h3 id="isolation-for-security">Isolation for Security</h3>
+<p>In a monolithic application if one feature of the application has a security
+breach, for example a vulnerability that allows remote code execution, then you
+must assume that an attacker could have gained access to every other feature of
+the system as well. This can be dangerous if, for example, your avatar upload
+feature has a security issue which ends up compromising your database with user
+passwords. Separating features into microservices using Amazon ECS allows you to
+secure access to AWS resources by giving each service its own AWS Identity and
+Access Management (IAM) role. When microservice best practices are followed, the
+result is that if an attacker compromises one service, they only gain access to
+the resources of that service, and cannot horizontally access other resources
+from other services without breaking into those services as well.</p>
+<h3 id="independent-scaling">Independent Scaling</h3>
+<p>When features are broken out into microservices, then the amount of
+infrastructure and number of instances used by each microservice class can be
+scaled up and down independently. This makes it easier to measure the cost of a
+particular feature and identify features that may need to be optimized first. If
+one particular feature is having issues with its resource needs, other features
+will not be impacted and reliable performance can be maintained.</p>
+<h3 id="development-velocity">Development Velocity</h3>
+<p>Microservices lower the risks in development, which can enable a team to build
+faster. In a monolith, adding a new feature can potentially impact every other
+feature that the monolith contains. Developers must carefully consider the
+impact of any code they add, and ensure that they do not break anything. On the
+other hand, a proper microservice architecture has new code for a new feature
+going into a new service. Developers can be confident that any code they write
+will actually not be able to impact the existing code at all unless they
+explicitly write a connection between two microservices.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../monolith.html" class="navigation navigation-prev " aria-label="Previous page: Monolith">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="proxy.html" class="navigation navigation-next " aria-label="Next page: Proxy Server">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Overview","level":"2.1","depth":1,"next":{"title":"Proxy Server","level":"2.2","depth":1,"path":"strangle/proxy.md","ref":"strangle/proxy.md","articles":[]},"previous":{"title":"Monolith","level":"1.3","depth":1,"path":"monolith.md","ref":"monolith.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"strangle/overview.md","mtime":"2020-06-04T19:58:14.451Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-04T20:01:52.099Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

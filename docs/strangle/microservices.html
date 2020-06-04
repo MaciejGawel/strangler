@@ -1,0 +1,469 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Microservices · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../assignment.html" />
+    
+    
+    <link rel="prev" href="service_registry.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../overview.html">
+            
+                <a href="../overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../monolith.html">
+            
+                <a href="../monolith.html">
+            
+                    
+                    Monolith
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Strangle the Monolith</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="overview.html">
+            
+                <a href="overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="proxy.html">
+            
+                <a href="proxy.html">
+            
+                    
+                    Proxy Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="service_registry.html">
+            
+                <a href="service_registry.html">
+            
+                    
+                    Service Registry
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.4" data-path="microservices.html">
+            
+                <a href="microservices.html">
+            
+                    
+                    Microservices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Summary</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../assignment.html">
+            
+                <a href="../assignment.html">
+            
+                    
+                    Assignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Microservices</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="deploy-microservices">Deploy microservices</h1>
+<p>In this section, you will break the Monolith application into three separate
+microservices. You will use Eureka for service discovery.</p>
+<h2 id="implementation-instructions">Implementation instructions</h2>
+<h3 id="step-1-generate-review-project">Step 1: Generate Review project</h3>
+<ol>
+<li>Visit <a href="https://start.spring.io/" target="_blank">Spring Initializr</a></li>
+<li>Fill in<ul>
+<li><strong>Group</strong> - <em>pl.edu.agh</em></li>
+<li><strong>Artifact</strong> - <em>review</em></li>
+<li><strong>Description</strong></li>
+</ul>
+</li>
+<li>Add dependency<ul>
+<li><em>Spring Web</em></li>
+<li><em>Spring Data JPA</em></li>
+<li><em>H2 Database</em></li>
+<li><em>Spring HATEOAS</em></li>
+<li><em>Eureka Discovery Client</em></li>
+</ul>
+</li>
+<li>Generate template</li>
+</ol>
+<h3 id="step-2-enable-eureka-client">Step 2: Enable Eureka Client</h3>
+<ol>
+<li><p>Add <code>@EnableEurekaClient</code> to the Proxy application</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> pl.edu.agh.review;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+<span class="hljs-keyword">import</span> org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-meta">@EnableEurekaClient</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReviewApplication</span> </span>{
+
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+    SpringApplication.run(ReviewApplication.class, args);
+  }
+}
+</code></pre>
+</li>
+<li><p>Set application properties</p>
+<pre><code>spring.application.name=review
+
+eureka.client.registerWithEureka=true
+eureka.client.fetchRegistry=false
+eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/
+</code></pre></li>
+</ol>
+<h3 id="step-3-move-business-logic">Step 3: Move business logic</h3>
+<p>Copy all required packages from bookinfo into new project.</p>
+<h3 id="step-4-reconfigure-zuul-proxy">Step 4: Reconfigure Zuul Proxy</h3>
+<ol>
+<li><p>Set application properties</p>
+<pre><code>...
+
+zuul.routes.review.path=/reviews/**
+zuul.routes.review.serviceId=review
+zuul.routes.review.stripPrefix=false
+
+zuul.routes.bookinfo.path=/**
+zuul.routes.bookinfo.url=http://bookinfo:8080/
+</code></pre></li>
+<li><p>Build Proxy Docker image</p>
+<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
+</code></pre>
+</li>
+</ol>
+<h3 id="step-5-run-review-service">Step 5: Run Review Service</h3>
+<ol>
+<li><p>Build Review Docker image</p>
+<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/review
+</code></pre>
+</li>
+<li><p>Add new service to Docker compose</p>
+<pre><code class="lang-yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&apos;3&apos;</span>
+<span class="hljs-attr">services:</span>
+<span class="hljs-attr">  bookinfo:</span>
+<span class="hljs-attr">    image:</span> bookinfo/monolith
+<span class="hljs-attr">  registry:</span>
+<span class="hljs-attr">    image:</span> bookinfo/registry
+<span class="hljs-attr">    ports:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-number">8761</span>:<span class="hljs-number">8761</span>
+<span class="hljs-attr">  review:</span>
+<span class="hljs-attr">    image:</span> bookinfo/review
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> registry
+<span class="hljs-attr">    links:</span>
+<span class="hljs-bullet">      -</span> registry
+<span class="hljs-attr">  proxy:</span>
+<span class="hljs-attr">    image:</span> bookinfo/proxy
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> registry
+<span class="hljs-bullet">      -</span> bookinfo
+<span class="hljs-bullet">      -</span> review
+<span class="hljs-attr">    links:</span>
+<span class="hljs-bullet">      -</span> registry
+<span class="hljs-bullet">      -</span> bookinfo
+<span class="hljs-bullet">      -</span> review
+<span class="hljs-attr">  client:</span>
+<span class="hljs-attr">    build:</span>
+<span class="hljs-attr">      context:</span> ./client
+<span class="hljs-attr">    environment:</span>
+<span class="hljs-bullet">      -</span> BOOKINFO_URL=http://proxy:<span class="hljs-number">8080</span>
+<span class="hljs-attr">    depends_on:</span>
+<span class="hljs-bullet">      -</span> proxy
+<span class="hljs-attr">    links:</span>
+<span class="hljs-bullet">      -</span> proxy
+</code></pre>
+</li>
+<li><p>Restart Docker Compose</p>
+<pre><code class="lang-sh">docker-compose restart
+docker-compose up <span class="hljs-_">-d</span>
+</code></pre>
+</li>
+<li><p>Access Eureka Dashboard at <code>http://localhost:8761</code> and verify that Proxy
+instance is registered.</p>
+</li>
+<li><p>Verify that client is working</p>
+<pre><code class="lang-sh">docker-compose logs <span class="hljs-_">-f</span>
+...
+client_1    | INFO:root:GET /products returned 200 OK
+client_1    | INFO:root:GET /details returned 200 OK
+client_1    | INFO:root:GET /reviews returned 200 OK
+</code></pre>
+<hr>
+<p><strong>NOTE:</strong> You may need to wait before the Review service is registered in
+Eureka. During this period, the Proxy server may be failing.</p>
+<hr>
+</li>
+</ol>
+<h3 id="step-6-create-details-and-product-services">Step 6: Create Details and Product services</h3>
+<p>Repeat the above steps for Details and Product services. When all services are
+migrated, you can disable the bookinfo service.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="service_registry.html" class="navigation navigation-prev " aria-label="Previous page: Service Registry">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../assignment.html" class="navigation navigation-next " aria-label="Next page: Assignment">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Microservices","level":"2.4","depth":1,"next":{"title":"Assignment","level":"3.1","depth":1,"path":"assignment.md","ref":"assignment.md","articles":[]},"previous":{"title":"Service Registry","level":"2.3","depth":1,"path":"strangle/service_registry.md","ref":"strangle/service_registry.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"strangle/microservices.md","mtime":"2020-06-04T19:58:14.450Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-04T20:01:52.099Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

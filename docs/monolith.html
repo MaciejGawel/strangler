@@ -1,0 +1,384 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Monolith · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="strangle/overview.html" />
+    
+    
+    <link rel="prev" href="overview.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="overview.html">
+            
+                <a href="overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="monolith.html">
+            
+                <a href="monolith.html">
+            
+                    
+                    Monolith
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Strangle the Monolith</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="strangle/overview.html">
+            
+                <a href="strangle/overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="strangle/proxy.html">
+            
+                <a href="strangle/proxy.html">
+            
+                    
+                    Proxy Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="strangle/service_registry.html">
+            
+                <a href="strangle/service_registry.html">
+            
+                    
+                    Service Registry
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="strangle/microservices.html">
+            
+                <a href="strangle/microservices.html">
+            
+                    
+                    Microservices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Summary</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="assignment.html">
+            
+                <a href="assignment.html">
+            
+                    
+                    Assignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Monolith</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="containerize-the-monolith">Containerize the Monolith</h1>
+<p>In this module, you will build a Docker image for the monolith application and
+run it using Docker Compose. This sample application is written in Java with the
+use of [Spring framework][3]. The following diagram presents the application
+architecture.</p>
+<center><img src="images/architecture.svg"></center>
+
+<h2 id="implementation-instructions">Implementation instructions</h2>
+<h3 id="step-1-download--open-the-project">Step 1: Download &amp; open the project</h3>
+<p>Download the source code from Github</p>
+<pre><code class="lang-sh">git <span class="hljs-built_in">clone</span> https://github.com/MaciejGawel/spring-bookinfo.git
+</code></pre>
+<h3 id="step-2-build-bookinfo-docker-image">Step 2: Build bookinfo Docker image</h3>
+<ol>
+<li>Navigate to the <em>bookinfo</em> directory.</li>
+<li><p>Build image with Maven</p>
+<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/monolith
+</code></pre>
+</li>
+<li><p>Verify that image exists</p>
+<pre><code class="lang-sh">docker images bookinfo/monolith
+
+REPOSITORY           TAG         IMAGE ID            CREATED            SIZE
+bookinfo/monolith    latest      caf341499b4b        1 minute ago       252MB
+</code></pre>
+</li>
+</ol>
+<h3 id="step-3-build-client-image">Step 3: Build Client image</h3>
+<ol>
+<li>Navigate to the root directory</li>
+<li><p>Run Docker Cmpose build action</p>
+<pre><code class="lang-sh">docker-compose build
+</code></pre>
+</li>
+</ol>
+<h3 id="step-4-run-docker-compose">Step 4: Run Docker Compose</h3>
+<ol>
+<li><p>Run Docker Compose up action</p>
+<pre><code class="lang-sh">docker-compose up <span class="hljs-_">-d</span>
+</code></pre>
+</li>
+<li><p>Verify that client is working</p>
+<pre><code class="lang-sh">docker-compose logs <span class="hljs-_">-f</span>
+...
+client_1    | INFO:root:GET /products returned 200 OK
+client_1    | INFO:root:GET /details returned 200 OK
+client_1    | INFO:root:GET /reviews returned 200 OK
+</code></pre>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="overview.html" class="navigation navigation-prev " aria-label="Previous page: Overview">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="strangle/overview.html" class="navigation navigation-next " aria-label="Next page: Overview">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Monolith","level":"1.3","depth":1,"next":{"title":"Overview","level":"2.1","depth":1,"path":"strangle/overview.md","ref":"strangle/overview.md","articles":[]},"previous":{"title":"Overview","level":"1.2","depth":1,"path":"overview.md","ref":"overview.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"monolith.md","mtime":"2020-06-04T19:58:14.447Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-04T20:01:52.099Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
