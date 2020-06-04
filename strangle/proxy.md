@@ -1,8 +1,8 @@
 # Deploy proxy server
 
-To start strangling our legacy application we will need a proxy server that will
-route our requests to appropriate microservice. For this purpose we will use
-[Netflix Zuul][1].
+To start strangling our legacy application, we will need a proxy server that
+will route our requests to a specific microservice. For this purpose, you will
+use [Netflix Zuul][1].
 
 ## Useful links
 

@@ -1,16 +1,17 @@
 # Overview
 
-In this exercise you will learn how to migrate from legacy monolith
+In this exercise, you will learn how to migrate from legacy monolith
 application to the cloud-native microservices. We'll use practices from Martin
 Fowler's [Strangler Fig Application][1] to slowly strangle away from a legacy
 system using microservices.
 
-In this classes you will:
+In this class, you will:
 
 1. Deploy legacy monolith application in Docker container.
 1. Deploy [Netflix Open Source Software][2] (Netflix OSS)
   - Eureka
   - Zuul
+  - Zipkin
 1. Break monolith into several microservices
 1. Strangle legacy application with new microservices deployed in Docker
 
@@ -42,17 +43,13 @@ In this course you will use:
 - Java with Maven
 - Python
 
-To complete this course make sure that you have the following tools:
+To complete this course, make sure that you have the following tools:
 
 - Docker CE - [installation guide][4]
 - Docker Compose - [installation guide][5]
 - Git client
 - Java
 - Maven
-
-## Outcome
-
-<!-- TODO: Describe expected outcome/report -->
 
 [1]: https://martinfowler.com/bliki/StranglerFigApplication.html
 [2]: https://netflix.github.io/

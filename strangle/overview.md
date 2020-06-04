@@ -1,7 +1,7 @@
 # Strangle the Monolith
 
 In this module, you will break the Monolith application into several
-interconnected servies and strangle old application.
+interconnected services and strangle old application.
 
 ## Desired architecture overview
 
@@ -9,7 +9,7 @@ interconnected servies and strangle old application.
 
 ## Why Microservices?
 
-<!-- TODO: Rewrite this section -->
+Significant aspects described by [AWS][1]:
 
 ### Isolation of Crashes
 
@@ -53,3 +53,5 @@ other hand, a proper microservice architecture has new code for a new feature
 going into a new service. Developers can be confident that any code they write
 will actually not be able to impact the existing code at all unless they
 explicitly write a connection between two microservices.
+
+[1]: https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-three/

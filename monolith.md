@@ -1,9 +1,9 @@
 # Containerize the Monolith
 
-In this module you will build a Docker image for the monolith application and
-run it with use of Docker Compose. This sample application is written in
-Java with use of [Spring framework][3]. The following diagram presents
-application architecture.
+In this module, you will build a Docker image for the monolith application and
+run it using Docker Compose. This sample application is written in Java with the
+use of [Spring framework][3]. The following diagram presents the application
+architecture.
 
 <center><img src="images/architecture.svg" /></center>
 

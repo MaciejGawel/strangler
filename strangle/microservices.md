@@ -1,7 +1,7 @@
 # Deploy microservices
 
-In this section you will break Monolith application into three separate
-microserwices. You will use Eureka for the service discovery.
+In this section, you will break the Monolith application into three separate
+microservices. You will use Eureka for service discovery.
 
 ## Implementation instructions
 
@@ -144,14 +144,14 @@ Copy all required packages from bookinfo into new project.
 
    ---
 
-   **NOTE:** You may need to wait before Review service is registered in Eureka.
-   During this period, Proxy server may be failing.
+   **NOTE:** You may need to wait before the Review service is registered in
+   Eureka. During this period, the Proxy server may be failing.
 
    ---
 
 ### Step 6: Create Details and Product services
 
 Repeat the above steps for Details and Product services. When all services are
-migrated, you can disable bookinfo service.
+migrated, you can disable the bookinfo service.
 
 [1]: https://start.spring.io/
