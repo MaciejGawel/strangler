@@ -10,4 +10,3 @@
 * [Microservices](strangle/microservices.md)
 
 ## Summary
-* [Clean Up](cleanup.md)
