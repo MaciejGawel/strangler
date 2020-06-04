@@ -256,22 +256,26 @@
 <p>In this exercise, you will learn how to migrate from legacy monolith
 application to the cloud-native microservices. We&apos;ll use practices from Martin
 Fowler&apos;s <a href="https://martinfowler.com/bliki/StranglerFigApplication.html" target="_blank">Strangler Fig Application</a> to slowly strangle away from a legacy
-system using microservices.</p>
-<p>In this class, you will:</p>
+system using microservices. The Microservices migration process depends on the
+legacy application. However, it can be described by the following steps:</p>
+<center><img src="images/overview.svg"></center>
+
+<p>The migration of the production-grade application must take into consideration
+many aspects, such as data migration and zero downtime. Going through the entire
+process can take many months. You can read more in <strong><a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/spe.2608?casa_token=c4UXjfK-vwAAAAAA:0XQ1gxD2CVRFR2D97l14mdiF4WG9g7qsE_9yZ1FfSKeR51BUEHXDeRySNB7Q7QOQsHv0hzI5Roz11g" target="_blank">this research paper</a></strong>.</p>
+<p>Due to limited time, in this class, you will perform a subset of steps (marked
+as red) on a very simple application. Particularly, you will:</p>
 <ol>
 <li>Deploy legacy monolith application in Docker container.</li>
-<li>Deploy <a href="https://netflix.github.io/" target="_blank">Netflix Open Source Software</a> (Netflix OSS)<ul>
-<li>Eureka</li>
-<li>Zuul</li>
-<li>Zipkin</li>
+<li>Deploy <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/spe.2608?casa_token=c4UXjfK-vwAAAAAA:0XQ1gxD2CVRFR2D97l14mdiF4WG9g7qsE_9yZ1FfSKeR51BUEHXDeRySNB7Q7QOQsHv0hzI5Roz11g" target="_blank">Netflix Open Source Software</a> (Netflix OSS)<ul>
+<li>Eureka - service discovery</li>
+<li>Zuul - gateway proxy</li>
+<li>Zipkin - request tracing</li>
 </ul>
 </li>
 <li>Break monolith into several microservices</li>
 <li>Strangle legacy application with new microservices deployed in Docker</li>
 </ol>
-<p>This guide contains simplified exercises. The migration of the production-grade
-application might take many months and must take into consideration many
-aspects, such as data migration and zero downtime.</p>
 <h2 id="why-it-matters"><a href="https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/" target="_blank">Why it Matters</a></h2>
 <p>Traditional monolithic architectures are hard to scale. As an application&apos;s code
 base grows, it becomes complex to update and maintain. Introducing new features,
@@ -343,7 +347,7 @@ service, or as a group of services.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Overview","level":"1.2","depth":1,"next":{"title":"Monolith","level":"1.3","depth":1,"path":"monolith.md","ref":"monolith.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"overview.md","mtime":"2020-06-04T19:58:14.448Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-04T20:01:52.099Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Overview","level":"1.2","depth":1,"next":{"title":"Monolith","level":"1.3","depth":1,"path":"monolith.md","ref":"monolith.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"overview.md","mtime":"2020-06-04T21:45:10.128Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-04T21:57:42.434Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

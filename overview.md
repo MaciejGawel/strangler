@@ -3,21 +3,25 @@
 In this exercise, you will learn how to migrate from legacy monolith
 application to the cloud-native microservices. We'll use practices from Martin
 Fowler's [Strangler Fig Application][1] to slowly strangle away from a legacy
-system using microservices.
+system using microservices. The Microservices migration process depends on the
+legacy application. However, it can be described by the following steps:
 
-In this class, you will:
+<center><img src="images/overview.svg" /></center>
+
+The migration of the production-grade application must take into consideration
+many aspects, such as data migration and zero downtime. Going through the entire
+process can take many months. You can read more in **[this research paper][2]**.
+
+Due to limited time, in this class, you will perform a subset of steps (marked
+as red) on a very simple application. Particularly, you will:
 
 1. Deploy legacy monolith application in Docker container.
 1. Deploy [Netflix Open Source Software][2] (Netflix OSS)
-  - Eureka
-  - Zuul
-  - Zipkin
+  - Eureka - service discovery
+  - Zuul - gateway proxy
+  - Zipkin - request tracing
 1. Break monolith into several microservices
 1. Strangle legacy application with new microservices deployed in Docker
-
-This guide contains simplified exercises. The migration of the production-grade
-application might take many months and must take into consideration many
-aspects, such as data migration and zero downtime.
 
 ## [Why it Matters][6]
 
@@ -52,8 +56,8 @@ To complete this course, make sure that you have the following tools:
 - Maven
 
 [1]: https://martinfowler.com/bliki/StranglerFigApplication.html
-[2]: https://netflix.github.io/
-[3]: https://spring.io/
+[2]: https://onlinelibrary.wiley.com/doi/pdf/10.1002/spe.2608?casa_token=c4UXjfK-vwAAAAAA:0XQ1gxD2CVRFR2D97l14mdiF4WG9g7qsE_9yZ1FfSKeR51BUEHXDeRySNB7Q7QOQsHv0hzI5Roz11g
+[3]: https://netflix.github.io/
 [4]: https://docs.docker.com/engine/install/
 [5]: https://docs.docker.com/compose/install/
 [6]: https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/
