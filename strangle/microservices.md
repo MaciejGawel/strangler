@@ -22,7 +22,7 @@ microservices. You will use Eureka for service discovery.
 
 ### Step 2: Enable Eureka Client
 
-1. Add `@EnableEurekaClient` to the Proxy application
+1. Add `@EnableEurekaClient` to the Review application
 
    ```java
    package pl.edu.agh.review;
