@@ -56,7 +56,7 @@ To complete this course, make sure that you have the following tools:
 - Maven
 
 [1]: https://martinfowler.com/bliki/StranglerFigApplication.html
-[2]: https://onlinelibrary.wiley.com/doi/pdf/10.1002/spe.2608?casa_token=c4UXjfK-vwAAAAAA:0XQ1gxD2CVRFR2D97l14mdiF4WG9g7qsE_9yZ1FfSKeR51BUEHXDeRySNB7Q7QOQsHv0hzI5Roz11g
+[2]: https://onlinelibrary.wiley.com/doi/pdf/10.1002/spe.2608?casa_token=WBkf71wnymoAAAAA%3AaRt3wSvvVRxZtlxTpwZbK1F_WzWZMAb9zgcszczVh1SeyMlnXWrLp-aCvcL7JY-oaPqoaVFsMYOeXg
 [3]: https://netflix.github.io/
 [4]: https://docs.docker.com/engine/install/
 [5]: https://docs.docker.com/compose/install/
