@@ -1,8 +1,8 @@
 # Overview
 
-In this exercise, you will learn how to migrate from legacy monolith
-application to the cloud-native microservices. We'll use practices from Martin
-Fowler's [Strangler Fig Application][1] to slowly strangle away from a legacy
+In this exercise, you will learn how to migrate from a legacy monolith
+application to cloud-native microservices. We'll use Martin Fowler's
+[Strangler Fig Application][1] practices to slowly strangle away from a legacy
 system using microservices. The Microservices migration process depends on the
 legacy application. However, it can be described by the following steps:
 
@@ -12,8 +12,8 @@ The migration of the production-grade application must take into consideration
 many aspects, such as data migration and zero downtime. Going through the entire
 process can take many months. You can read more in **[this research paper][2]**.
 
-Due to limited time, in this class, you will perform a subset of steps (marked
-as red) on a very simple application. Particularly, you will:
+Due to limited time in this class, you will perform a subset of steps (marked as
+red) on a very simple application. Mainly, you will:
 
 1. Deploy legacy monolith application in Docker container.
 1. Deploy [Netflix Open Source Software][2] (Netflix OSS)
@@ -26,7 +26,7 @@ as red) on a very simple application. Particularly, you will:
 ## [Why it Matters][6]
 
 Traditional monolithic architectures are hard to scale. As an application's code
-base grows, it becomes complex to update and maintain. Introducing new features,
+basegrows, it becomes complex to update and maintain. Introducing new features,
 languages, frameworks, and technologies becomes very hard, limiting innovation
 and new ideas.
 
@@ -39,7 +39,7 @@ service, or as a group of services.
 
 ## Prerequisites
 
-In this course you will use:
+In this course, you will use:
 
 - Docker
 - Docker Compose

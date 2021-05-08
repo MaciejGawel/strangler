@@ -2,7 +2,7 @@
 
 In this module, you will build a Docker image for the monolith application and
 run it using Docker Compose. This sample application is written in Java with the
-use of [Spring framework][1]. The following diagram presents the application
+use of the [Spring framework][1]. The following diagram presents the application
 architecture.
 
 <center><img src="images/architecture.svg" /></center>

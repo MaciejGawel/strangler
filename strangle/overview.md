@@ -1,7 +1,7 @@
 # Strangle the Monolith
 
 In this module, you will break the Monolith application into several
-interconnected services and strangle old application.
+interconnected services and strangle the old application.
 
 ## Desired architecture overview
 

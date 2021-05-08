@@ -4,13 +4,13 @@ A Service Registry is useful because it enables client-side load-balancing and
 decouples service providers from consumers without the need for DNS.
 
 In this exercise, you will set up a [Netflix Eureka][1] Service Registry and
-then adjust Proxy Server to register with the Registry and use it to resolve
+then adjust the Proxy Server to register with the Registry and use it to resolve
 its own host. We will not update the Monolith application configuration because
 it will be replaced in the following sections.
 
-Eureka is a REST (Representational State Transfer) based service that is
-primarily used in the AWS cloud for locating services for the purpose of load
-balancing and failover of middle-tier servers.
+Eureka is a REST (Representational State Transfer) based service primarily used
+in the AWS cloud for locating services for the purpose of load balancing and
+failover of middle-tier servers.
 
 ## Useful links
 
