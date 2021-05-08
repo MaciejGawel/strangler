@@ -129,8 +129,8 @@ Copy all required packages from bookinfo into new project.
    docker-compose up -d
    ```
 
-1. Access Eureka Dashboard at `http://localhost:8761` and verify that Proxy
-   instance is registered.
+1. Access Eureka Dashboard at `http://localhost:8761` and verify that
+   microservice instance is registered.
 
 1. Verify that client is working
 
