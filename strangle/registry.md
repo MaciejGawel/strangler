@@ -4,7 +4,7 @@ A Service Registry is useful because it enables client-side load-balancing and
 decouples service providers from consumers without the need for DNS.
 
 In this exercise, you will set up a [Netflix Eureka][1] Service Registry and
-then adjust the Proxy Server to register with the Registry and use it to resolve
+then adjust the Gateway to register with the Registry and use it to resolve
 its own host. We will not update the Monolith application configuration because
 it will be replaced in the following sections.
 
@@ -65,7 +65,7 @@ failover of middle-tier servers.
    eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
    ```
 
-### Step 3: Update Proxy configuration
+### Step 3: Update Gateway configuration
 
 1. Add Eureka Client dependency
 
@@ -76,9 +76,9 @@ failover of middle-tier servers.
    </dependency>
    ```
 
-1. Add `@EnableEurekaClient` to the Proxy application
+1. Add `@EnableEurekaClient` to the Gateway application
 
-1. Set Proxy application properties
+1. Set Gateway application properties
 
    ```
    ...
@@ -88,10 +88,13 @@ failover of middle-tier servers.
    eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/
    ```
 
+   At this point, we cannot use Eureka to discover other services as the legacy
+   application is not registered in the Registry.
+
 1. Build Docker image
 
    ```sh
-   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
+   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/gateway
    ```
 
 ### Step 4: Run Service Registry
@@ -113,8 +116,8 @@ failover of middle-tier servers.
        image: bookinfo/registry
        ports:
          - 8761:8761
-     proxy:
-       image: bookinfo/proxy
+     gateway:
+       image: bookinfo/gateway
        depends_on:
          - registry
          - bookinfo
@@ -125,11 +128,11 @@ failover of middle-tier servers.
        build:
          context: ./client
        environment:
-         - BOOKINFO_URL=http://proxy:8080
+         - BOOKINFO_URL=http://gateway:8080
        depends_on:
-         - proxy
+         - gateway
        links:
-         - proxy
+         - gateway
    ```
 
 1. Restart Docker Compose
@@ -141,13 +144,13 @@ failover of middle-tier servers.
    docker-compose up -d
    ```
 
-1. Access Eureka Dashboard at `http://localhost:8761` and verify that Proxy
+1. Access Eureka Dashboard at `http://localhost:8761` and verify that Gateway
    instance is registered.
 
 1. Verify that client is working
 
    ```sh
-   docker-compose logs -f
+   docker-compose logs client -f
    ...
    client_1    | INFO:root:GET /products returned 200 OK
    client_1    | INFO:root:GET /details returned 200 OK

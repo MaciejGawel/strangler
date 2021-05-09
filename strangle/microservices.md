@@ -53,27 +53,30 @@ microservices. You will use Eureka for service discovery.
 
 ### Step 3: Move business logic
 
-Copy all required packages from bookinfo into new project.
+Copy all required packages from bookinfo into the new project. Business logic
+does not require changes. However, some modifications in import paths may be
+needed.
 
-### Step 4: Reconfigure Zuul Proxy
+### Step 4: Reconfigure Gateway
 
 1. Set application properties
 
    ```
    ...
 
-   zuul.routes.review.path=/reviews/**
-   zuul.routes.review.serviceId=review
-   zuul.routes.review.stripPrefix=false
+   spring.cloud.gateway.routes[0].id=reviews
+   spring.cloud.gateway.routes[0].uri=lb://review
+   spring.cloud.gateway.routes[0].predicates[0]=Path=/reviews/**
 
-   zuul.routes.bookinfo.path=/**
-   zuul.routes.bookinfo.url=http://bookinfo:8080/
+   spring.cloud.gateway.routes[1].id=bookinfo
+   spring.cloud.gateway.routes[1].uri=http://bookinfo:8080
+   spring.cloud.gateway.routes[1].predicates[0]=Path=/**
    ```
 
-1. Build Proxy Docker image
+1. Build Gateway Docker image
 
    ```sh
-   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
+   mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/gateway
    ```
 
 ### Step 5: Run Review Service
@@ -101,8 +104,8 @@ Copy all required packages from bookinfo into new project.
          - registry
        links:
          - registry
-     proxy:
-       image: bookinfo/proxy
+     gateway:
+       image: bookinfo/gateway
        depends_on:
          - registry
          - bookinfo
@@ -115,11 +118,11 @@ Copy all required packages from bookinfo into new project.
        build:
          context: ./client
        environment:
-         - BOOKINFO_URL=http://proxy:8080
+         - BOOKINFO_URL=http://gateway:8080
        depends_on:
-         - proxy
+         - gateway
        links:
-         - proxy
+         - gateway
    ```
 
 1. Restart Docker Compose
@@ -135,7 +138,7 @@ Copy all required packages from bookinfo into new project.
 1. Verify that client is working
 
    ```sh
-   docker-compose logs -f
+   docker-compose logs client -f
    ...
    client_1    | INFO:root:GET /products returned 200 OK
    client_1    | INFO:root:GET /details returned 200 OK
@@ -145,7 +148,7 @@ Copy all required packages from bookinfo into new project.
    ---
 
    **NOTE:** You may need to wait before the Review service is registered in
-   Eureka. During this period, the Proxy server may be failing.
+   Eureka. During this period, the Gateway server may be failing.
 
    ---
 

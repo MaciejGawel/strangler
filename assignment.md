@@ -10,7 +10,7 @@ happening in application services.
 ## Implementation instructions
 
 - Deploy Zipkin Service
-- Gather spans from all microservices (including Proxy)
+- Gather spans from all microservices (including Gateway)
 
 As a result of this exercise, prepare a report containing detailed information
 about:

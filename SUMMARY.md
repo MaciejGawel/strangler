@@ -5,8 +5,8 @@
 
 ## Strangle the Monolith
 * [Overview](strangle/overview.md)
-* [Proxy Server](strangle/proxy.md)
-* [Service Registry](strangle/service_registry.md)
+* [Edge Server](strangle/gateway.md)
+* [Service Registry](strangle/registry.md)
 * [Microservices](strangle/microservices.md)
 
 ## Summary

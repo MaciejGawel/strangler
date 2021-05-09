@@ -60,7 +60,7 @@
     <link rel="next" href="../assignment.html" />
     
     
-    <link rel="prev" href="service_registry.html" />
+    <link rel="prev" href="registry.html" />
     
 
     </head>
@@ -148,12 +148,12 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2" data-path="proxy.html">
+        <li class="chapter " data-level="2.2" data-path="gateway.html">
             
-                <a href="proxy.html">
+                <a href="gateway.html">
             
                     
-                    Proxy Server
+                    Edge Server
             
                 </a>
             
@@ -161,9 +161,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.3" data-path="service_registry.html">
+        <li class="chapter " data-level="2.3" data-path="registry.html">
             
-                <a href="service_registry.html">
+                <a href="registry.html">
             
                     
                     Service Registry
@@ -303,21 +303,24 @@ eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/
 </code></pre></li>
 </ol>
 <h3 id="step-3-move-business-logic">Step 3: Move business logic</h3>
-<p>Copy all required packages from bookinfo into new project.</p>
-<h3 id="step-4-reconfigure-zuul-proxy">Step 4: Reconfigure Zuul Proxy</h3>
+<p>Copy all required packages from bookinfo into the new project. Business logic
+does not require changes. However, some modifications in import paths may be
+needed.</p>
+<h3 id="step-4-reconfigure-gateway">Step 4: Reconfigure Gateway</h3>
 <ol>
 <li><p>Set application properties</p>
 <pre><code>...
 
-zuul.routes.review.path=/reviews/**
-zuul.routes.review.serviceId=review
-zuul.routes.review.stripPrefix=false
+spring.cloud.gateway.routes[0].id=reviews
+spring.cloud.gateway.routes[0].uri=lb://review
+spring.cloud.gateway.routes[0].predicates[0]=Path=/reviews/**
 
-zuul.routes.bookinfo.path=/**
-zuul.routes.bookinfo.url=http://bookinfo:8080/
+spring.cloud.gateway.routes[1].id=bookinfo
+spring.cloud.gateway.routes[1].uri=http://bookinfo:8080
+spring.cloud.gateway.routes[1].predicates[0]=Path=/**
 </code></pre></li>
-<li><p>Build Proxy Docker image</p>
-<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
+<li><p>Build Gateway Docker image</p>
+<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/gateway
 </code></pre>
 </li>
 </ol>
@@ -342,8 +345,8 @@ zuul.routes.bookinfo.url=http://bookinfo:8080/
 <span class="hljs-bullet">      -</span> registry
 <span class="hljs-attr">    links:</span>
 <span class="hljs-bullet">      -</span> registry
-<span class="hljs-attr">  proxy:</span>
-<span class="hljs-attr">    image:</span> bookinfo/proxy
+<span class="hljs-attr">  gateway:</span>
+<span class="hljs-attr">    image:</span> bookinfo/gateway
 <span class="hljs-attr">    depends_on:</span>
 <span class="hljs-bullet">      -</span> registry
 <span class="hljs-bullet">      -</span> bookinfo
@@ -356,11 +359,11 @@ zuul.routes.bookinfo.url=http://bookinfo:8080/
 <span class="hljs-attr">    build:</span>
 <span class="hljs-attr">      context:</span> ./client
 <span class="hljs-attr">    environment:</span>
-<span class="hljs-bullet">      -</span> BOOKINFO_URL=http://proxy:<span class="hljs-number">8080</span>
+<span class="hljs-bullet">      -</span> BOOKINFO_URL=http://gateway:<span class="hljs-number">8080</span>
 <span class="hljs-attr">    depends_on:</span>
-<span class="hljs-bullet">      -</span> proxy
+<span class="hljs-bullet">      -</span> gateway
 <span class="hljs-attr">    links:</span>
-<span class="hljs-bullet">      -</span> proxy
+<span class="hljs-bullet">      -</span> gateway
 </code></pre>
 </li>
 <li><p>Restart Docker Compose</p>
@@ -372,7 +375,7 @@ docker-compose up <span class="hljs-_">-d</span>
 microservice instance is registered.</p>
 </li>
 <li><p>Verify that client is working</p>
-<pre><code class="lang-sh">docker-compose logs <span class="hljs-_">-f</span>
+<pre><code class="lang-sh">docker-compose logs client <span class="hljs-_">-f</span>
 ...
 client_1    | INFO:root:GET /products returned 200 OK
 client_1    | INFO:root:GET /details returned 200 OK
@@ -380,7 +383,7 @@ client_1    | INFO:root:GET /reviews returned 200 OK
 </code></pre>
 <hr>
 <p><strong>NOTE:</strong> You may need to wait before the Review service is registered in
-Eureka. During this period, the Proxy server may be failing.</p>
+Eureka. During this period, the Gateway server may be failing.</p>
 <hr>
 </li>
 </ol>
@@ -414,7 +417,7 @@ migrated, you can disable the bookinfo service.</p>
 
             
                 
-                <a href="service_registry.html" class="navigation navigation-prev " aria-label="Previous page: Service Registry">
+                <a href="registry.html" class="navigation navigation-prev " aria-label="Previous page: Service Registry">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -430,7 +433,7 @@ migrated, you can disable the bookinfo service.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Microservices","level":"2.4","depth":1,"next":{"title":"Assignment","level":"3.1","depth":1,"path":"assignment.md","ref":"assignment.md","articles":[]},"previous":{"title":"Service Registry","level":"2.3","depth":1,"path":"strangle/service_registry.md","ref":"strangle/service_registry.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"strangle/microservices.md","mtime":"2021-05-08T16:23:44.213Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-08T17:11:02.175Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Microservices","level":"2.4","depth":1,"next":{"title":"Assignment","level":"3.1","depth":1,"path":"assignment.md","ref":"assignment.md","articles":[]},"previous":{"title":"Service Registry","level":"2.3","depth":1,"path":"strangle/registry.md","ref":"strangle/registry.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"strangle/microservices.md","mtime":"2021-05-09T18:46:28.511Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-09T19:15:21.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -16,10 +16,10 @@ Due to limited time in this class, you will perform a subset of steps (marked as
 red) on a very simple application. Mainly, you will:
 
 1. Deploy legacy monolith application in Docker container.
-1. Deploy [Netflix Open Source Software][2] (Netflix OSS)
-  - Eureka - service discovery
-  - Zuul - gateway proxy
-  - Zipkin - request tracing
+1. Deploy services
+  - Edge server
+  - Service registry (Eureka)
+  - Request tracing (Zipkin)
 1. Break monolith into several microservices
 1. Strangle legacy application with new microservices deployed in Docker
 

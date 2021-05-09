@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Service Registry · GitBook</title>
+        <title>Edge Server · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="microservices.html" />
+    <link rel="next" href="registry.html" />
     
     
-    <link rel="prev" href="proxy.html" />
+    <link rel="prev" href="overview.html" />
     
 
     </head>
@@ -148,12 +148,12 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2" data-path="proxy.html">
+        <li class="chapter active" data-level="2.2" data-path="gateway.html">
             
-                <a href="proxy.html">
+                <a href="gateway.html">
             
                     
-                    Proxy Server
+                    Edge Server
             
                 </a>
             
@@ -161,9 +161,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.3" data-path="service_registry.html">
+        <li class="chapter " data-level="2.3" data-path="registry.html">
             
-                <a href="service_registry.html">
+                <a href="registry.html">
             
                     
                     Service Registry
@@ -237,7 +237,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Service Registry</a>
+        <a href=".." >Edge Server</a>
     </h1>
 </div>
 
@@ -252,95 +252,49 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="deploy-service-registry">Deploy Service Registry</h1>
-<p>A Service Registry is useful because it enables client-side load-balancing and
-decouples service providers from consumers without the need for DNS.</p>
-<p>In this exercise, you will set up a <a href="https://github.com/spring-cloud/spring-cloud-netflix" target="_blank">Netflix Eureka</a> Service Registry and
-then adjust the Proxy Server to register with the Registry and use it to resolve
-its own host. We will not update the Monolith application configuration because
-it will be replaced in the following sections.</p>
-<p>Eureka is a REST (Representational State Transfer) based service primarily used
-in the AWS cloud for locating services for the purpose of load balancing and
-failover of middle-tier servers.</p>
+                                <h1 id="deploy-edge-server">Deploy edge server</h1>
+<p>To start strangling our legacy application, we will need a proxy server that
+will route our requests to a specific microservice. Netflix OSS provides a proxy
+server called Zuul. However, Spring will not support Zuul 2. Therefore, for this
+excersice you will use <a href="https://spring.io/projects/spring-cloud-gateway" target="_blank">Spring Cloud Gatway</a>.</p>
 <h2 id="useful-links">Useful links</h2>
 <ul>
-<li><strong><a href="https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-eureka-server.html" target="_blank">Service Discovery: Eureka Server</a></strong></li>
-<li><strong><a href="https://cloud.spring.io/spring-cloud-netflix/multi/multi__service_discovery_eureka_clients.html" target="_blank">Service Discovery: Eureka Clients</a></strong></li>
+<li><a href="https://www.baeldung.com/spring-cloud-gateway" target="_blank">Exploring the New Spring Cloud Gateway</a></li>
+<li><a href="https://www.programmersought.com/article/2878807662/" target="_blank">Zuul migrated to Spring-Cloud-Gateway</a></li>
 </ul>
 <h2 id="implementation-instructions">Implementation instructions</h2>
-<h3 id="step-1-generate-service-registry-project">Step 1: Generate Service Registry project</h3>
+<h3 id="step-1-generate-gateway-project">Step 1: Generate gateway project</h3>
 <ol>
 <li>Visit <a href="https://start.spring.io/" target="_blank">Spring Initializr</a></li>
 <li>Fill in<ul>
 <li><strong>Group</strong> - <em>pl.edu.agh</em></li>
-<li><strong>Artifact</strong> - <em>registry</em></li>
+<li><strong>Artifact</strong> - <em>gateway</em></li>
 <li><strong>Description</strong></li>
 </ul>
 </li>
 <li>Add dependency<ul>
-<li><em>Eureka Server</em></li>
+<li><em>Gateway</em></li>
 </ul>
 </li>
 <li>Generate template</li>
 </ol>
-<h3 id="step-2-enable-eureka-service-registry">Step 2: Enable Eureka Service Registry</h3>
+<h3 id="step-2-enalbe-gateway">Step 2: Enalbe Gateway</h3>
 <ol>
-<li><p>Annotate Registry Application</p>
-<pre><code class="lang-java"><span class="hljs-keyword">package</span> pl.edu.agh.registry;
-
-<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
-<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
-<span class="hljs-keyword">import</span> org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
-
-<span class="hljs-meta">@SpringBootApplication</span>
-<span class="hljs-meta">@EnableEurekaServer</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RegistryApplication</span> </span>{
-
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-    SpringApplication.run(RegistryApplication.class, args);
-  }
-}
-</code></pre>
-</li>
 <li><p>Set application properties</p>
 <pre><code>#Server port
-server.port=8761
+server.port=8080
 #Application name
-spring.application.name=registry
+spring.application.name=gateway
 
-eureka.instance.hostname=localhost
-eureka.client.registerWithEureka=false
-eureka.client.fetchRegistry=false
-eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
+spring.cloud.gateway.routes[0].id=bookinfo
+spring.cloud.gateway.routes[0].uri=http://bookinfo:8080
+spring.cloud.gateway.routes[0].predicates[0]=Path=/**
 </code></pre></li>
 </ol>
-<h3 id="step-3-update-proxy-configuration">Step 3: Update Proxy configuration</h3>
-<ol>
-<li><p>Add Eureka Client dependency</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-</code></pre>
-</li>
-<li><p>Add <code>@EnableEurekaClient</code> to the Proxy application</p>
-</li>
-<li><p>Set Proxy application properties</p>
-<pre><code>...
-
-eureka.client.registerWithEureka=true
-eureka.client.fetchRegistry=true
-eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/
-</code></pre></li>
-<li><p>Build Docker image</p>
-<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/proxy
-</code></pre>
-</li>
-</ol>
-<h3 id="step-4-run-service-registry">Step 4: Run Service Registry</h3>
+<h3 id="step-3-run-gateway-server">Step 3: Run Gateway Server</h3>
 <ol>
 <li><p>Build Docker image</p>
-<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/registry
+<pre><code class="lang-sh">mvn spring-boot:build-image -Dspring-boot.build-image.imageName=bookinfo/gateway
 </code></pre>
 </li>
 <li><p>Add new service to Docker compose</p>
@@ -348,40 +302,30 @@ eureka.client.serviceUrl.defaultZone=http://registry:8761/eureka/
 <span class="hljs-attr">services:</span>
 <span class="hljs-attr">  bookinfo:</span>
 <span class="hljs-attr">    image:</span> bookinfo/monolith
-<span class="hljs-attr">  registry:</span>
-<span class="hljs-attr">    image:</span> bookinfo/registry
-<span class="hljs-attr">    ports:</span>
-<span class="hljs-bullet">      -</span> <span class="hljs-number">8761</span>:<span class="hljs-number">8761</span>
-<span class="hljs-attr">  proxy:</span>
-<span class="hljs-attr">    image:</span> bookinfo/proxy
+<span class="hljs-attr">  gateway:</span>
+<span class="hljs-attr">    image:</span> bookinfo/gateway
 <span class="hljs-attr">    depends_on:</span>
-<span class="hljs-bullet">      -</span> registry
 <span class="hljs-bullet">      -</span> bookinfo
 <span class="hljs-attr">    links:</span>
-<span class="hljs-bullet">      -</span> registry
 <span class="hljs-bullet">      -</span> bookinfo
 <span class="hljs-attr">  client:</span>
 <span class="hljs-attr">    build:</span>
 <span class="hljs-attr">      context:</span> ./client
 <span class="hljs-attr">    environment:</span>
-<span class="hljs-bullet">      -</span> BOOKINFO_URL=http://proxy:<span class="hljs-number">8080</span>
+<span class="hljs-bullet">      -</span> BOOKINFO_URL=http://gateway:<span class="hljs-number">8080</span>
 <span class="hljs-attr">    depends_on:</span>
-<span class="hljs-bullet">      -</span> proxy
+<span class="hljs-bullet">      -</span> gateway
 <span class="hljs-attr">    links:</span>
-<span class="hljs-bullet">      -</span> proxy
+<span class="hljs-bullet">      -</span> gateway
 </code></pre>
 </li>
 <li><p>Restart Docker Compose</p>
-<!-- TODO: Think about hot reload -->
 <pre><code class="lang-sh">docker-compose restart
 docker-compose up <span class="hljs-_">-d</span>
 </code></pre>
 </li>
-<li><p>Access Eureka Dashboard at <code>http://localhost:8761</code> and verify that Proxy
-instance is registered.</p>
-</li>
 <li><p>Verify that client is working</p>
-<pre><code class="lang-sh">docker-compose logs <span class="hljs-_">-f</span>
+<pre><code class="lang-sh">docker-compose logs client <span class="hljs-_">-f</span>
 ...
 client_1    | INFO:root:GET /products returned 200 OK
 client_1    | INFO:root:GET /details returned 200 OK
@@ -416,12 +360,12 @@ client_1    | INFO:root:GET /reviews returned 200 OK
 
             
                 
-                <a href="proxy.html" class="navigation navigation-prev " aria-label="Previous page: Proxy Server">
+                <a href="overview.html" class="navigation navigation-prev " aria-label="Previous page: Overview">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="microservices.html" class="navigation navigation-next " aria-label="Next page: Microservices">
+                <a href="registry.html" class="navigation navigation-next " aria-label="Next page: Service Registry">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -432,7 +376,7 @@ client_1    | INFO:root:GET /reviews returned 200 OK
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Service Registry","level":"2.3","depth":1,"next":{"title":"Microservices","level":"2.4","depth":1,"path":"strangle/microservices.md","ref":"strangle/microservices.md","articles":[]},"previous":{"title":"Proxy Server","level":"2.2","depth":1,"path":"strangle/proxy.md","ref":"strangle/proxy.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"strangle/service_registry.md","mtime":"2021-05-08T16:59:46.044Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-08T17:11:02.175Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Edge Server","level":"2.2","depth":1,"next":{"title":"Service Registry","level":"2.3","depth":1,"path":"strangle/registry.md","ref":"strangle/registry.md","articles":[]},"previous":{"title":"Overview","level":"2.1","depth":1,"path":"strangle/overview.md","ref":"strangle/overview.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"strangle/gateway.md","mtime":"2021-05-09T18:42:36.719Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-09T19:15:21.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
