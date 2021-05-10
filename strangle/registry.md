@@ -150,7 +150,7 @@ failover of middle-tier servers.
 1. Verify that client is working
 
    ```sh
-   docker-compose logs client -f
+   docker-compose logs -f client
    ...
    client_1    | INFO:root:GET /products returned 200 OK
    client_1    | INFO:root:GET /details returned 200 OK
