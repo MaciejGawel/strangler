@@ -12,6 +12,12 @@ The migration of the production-grade application must take into consideration
 many aspects, such as data migration and zero downtime. Going through the entire
 process can take many months. You can read more in **[this research paper][2]**.
 
+---
+
+**NOTE:** You can find a free version of the article using [Google Scholar][7].
+
+---
+
 Due to limited time in this class, you will perform a subset of steps (marked as
 red) on a very simple application. Mainly, you will:
 
@@ -61,3 +67,4 @@ To complete this course, make sure that you have the following tools:
 [4]: https://docs.docker.com/engine/install/
 [5]: https://docs.docker.com/compose/install/
 [6]: https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/
+[7]: https://scholar.google.com/scholar?hl=pl&as_sdt=0%2C5&q=Microservices+migration+patterns&btnG=
